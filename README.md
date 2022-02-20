@@ -1,4 +1,4 @@
-First of all, I wish to propose the my source code inherited from the inital task but using "Clean Architecture" using .net core development latest tendencies (especially its important when we plan the long-term product development cycles). So, trying to code ortogonal as much as possibel.
+First of all, I wish to propose the my source code inherited from the inital task but using "Clean Architecture" using .net core development latest tendencies (especially its important when we plan the long-term product development cycles). So, trying to code ortogonal as much as possible.
 
 What I propose (and you can find this in code).
 
