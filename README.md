@@ -1,4 +1,4 @@
-First of all, I wish to propose the my source code inherited from the inital task but using "Clean Architecture"  with .net core development latest tendencies (especially its important when we plan the long-term product development cycles). .
+First of all, I wish to propose the my source code inherited from the inital task but using "Clean Architecture" using .net core development latest tendencies (especially its important when we plan the long-term product development cycles). .
 
 What I propose (and you can find this in code).
 
@@ -24,9 +24,12 @@ I've used UoW repository pattern, its simple and flexible and decouples business
 FluentValidation + Automapper + Error handling unification - usually most known tools in .net. I've implemented the basic approach.
 
 **5. Task-Based Asynchonous services**
-This is a pretty standard modern software API development requirement.
+This is a pretty standard modern software API development requirement widely.
 
-**6. Open API + Swagger for testing + xUnit test Fixtures**
+**6. Other**
+- Open API + Swagger for testing
+- DI / IoC Containers
+- xUnit test Fixtures (basic)
 
 
 **Top-3 readings / books / authors which influences most last 3 years:**
