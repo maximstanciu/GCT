@@ -1,10 +1,10 @@
-First of all, I want to mention that the provided source code architecture doesnt follow  the modern flexible development tendencies especially when we plan the long-term product development cycles.  Do can find my solution which you can percieve as a refactoring of initial sc based on my vision of sofware architecture within complex domain projects.
+First of all, I wish to mention that the provided source code architecture doesnt follow  the modern flexible development tendencies especially when we plan the long-term product development cycles.  Do can find my solution which you can percieve as a refactoring of initial sc based on my vision of sofware architecture within complex domain projects.
 
 What I propose (and you can find this in code).
 
-**1. Domains Identifcation and BC (Bounded Contexts) definition
--- 3 services 1. Users Service. 2. Accounts Service 3. Finance Ledger Service (In this example i've used double-entry strategy) and 
--- 1 Processor - Payment Processor (Abstract).
+==1. Domains Identifcation and BC (Bounded Contexts) definition
+3 services 1. Users Service. 2. Accounts Service 3. Finance Ledger Service (In this example i've used double-entry strategy) and 
+1 Processor - Payment Processor (Abstract).
 
 Services: Anemic model & follow SRP, 
 Payment processor: represents the very basic SAGA transactional pattern within a single Persistence (sqlite in my example) aka SQL Transactions (usually in complex system we need to use the distributed transactions services like https://www.opensleigh.net/ , tps://masstransit-project.com/ or https://axoniq.io/, AWS Step Functions, etc) - depends on complexity of project).
