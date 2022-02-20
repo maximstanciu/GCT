@@ -18,7 +18,7 @@ We initially should lay down a mechanism for processing large amount of data, wh
 ![](https://referbruv.com/data/Admin/2020/6/mediator-block.png)
 
 **3. Persistence**
-I've used UoW repository pattern, its simple and flexible and decouples business code from data Access. As a result, the persistence Framework can be changed without a great effort.
+I've used UoW repository pattern, its simple and flexible and decouples business code from data Access. As a result, the persistence Framework can be changed without a great effort. Database: SQLite
 
 **4. Validation**
 FluentValidation + Automapper + Error handling unification - usually most known tools in .net. I've implemented the basic approach.
