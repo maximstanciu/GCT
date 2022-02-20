@@ -15,20 +15,24 @@ Payment processor: represents the very basic SAGA transactional pattern within a
 
 **2. CQRS / Mediator Pattern
 **
+
 We initially should lay down a mechanism for processing large amount of data, which is not uncommon for microservice architectures. So i've divided API calls into the Commands and Queries. So its simple to keep data for read in denormalized way (mongodb, elasticache, etc)**
 
 ![](https://referbruv.com/data/Admin/2020/6/mediator-block.png)
 
 **3. Persistence
 **
+
 I've used UoW repository pattern, its simple and flexible and decouples business code from data Access. As a result, the persistence Framework can be changed without a great effort.
 
 **4. Validation
 **
+
 FluentValidation + Automapper + Error handling unification - usually most known tools in .net. I've implemented the basic approach.
 
 **5. Task-Based Asynchonous services 
 **
+
 This is a pretty standard modern software API development requirement.
 
 **6. Open API + Swagger for testing + xUnit test Fixtures
@@ -37,6 +41,7 @@ This is a pretty standard modern software API development requirement.
 
 **Top-3 readings / books / authors which influences most last 3 years:
 **
+
 1. Chris Evans / DDD - https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215
 2. Robert C Marting / Clean Architecture - https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164
 3. https://docs.microsoft.com/en-us/dotnet/architecture/microservices/  + https://www.amazon.com/Building-Event-Driven-Microservices-Leveraging-Organizational/dp/1492057894
