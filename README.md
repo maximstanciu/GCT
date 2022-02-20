@@ -16,6 +16,7 @@ Payment processor: represents the very basic SAGA transactional pattern within a
 **2. CQRS / Mediator Pattern
 **
 We initially should lay down a mechanism for processing large amount of data, which is not uncommon for microservice architectures. So i've divided API calls into the Commands and Queries. So its simple to keep data for read in denormalized way (mongodb, elasticache, etc)**
+
 ![](https://referbruv.com/data/Admin/2020/6/mediator-block.png)
 
 **3. Persistence
