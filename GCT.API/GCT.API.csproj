@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="MediatR" Version="9.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\GCT.Contracts\GCT.Contracts.csproj" />
+	  <ProjectReference Include="..\GCT.Core\GCT.Core.csproj" />
+	  <ProjectReference Include="..\GCT.Infrastructure\GCT.Infrastructure.csproj" />
+	  <ProjectReference Include="..\GCT.Migrations\GCT.Migrations.csproj" />
+	</ItemGroup>
+
+
+</Project>
