@@ -1,20 +1,16 @@
-Hello Simon,
-Hope this email find you well.
+First of all, I want to mention that the provided source code architecture doesnt follow  the modern flexible development tendencies especially when we plan the long-term product development cycles.  Do can find my solution which you can percieve as a refactoring of initial sc based on my vision of sofware architecture within complex domain projects.
 
-First of all - I want to mention that the provided source code architecture is unacceptable (in my opinion) when you're working especially with finance transactions.
-Using the my repo link %% you can find my solution which you can percieve as a refactoring of initial SC with my vision on general sofware architecture of complex domain projects.
+What I propose (and you can find this in code).
 
-What I propose and you can find this in code.
+**1. Domains Identifcation and BC (Bounded Contexts) definition
+-- 3 services 1. Users Service. 2. Accounts Service 3. Finance Ledger Service (In this example i've used double-entry strategy) and 
+-- 1 Processor - Payment Processor (Abstract).
 
-1. Domains Identifcation and BC (Bounded Contexts) definition 
-- 3 services 1. Users Service. 2. Accounts Service 3. Finance Ledger Service (In this example i've used double-entry strategy) and 
-- 1 Processor - Payment Processor (Abstract).
+Services: Anemic model & follow SRP, 
+Payment processor: represents the very basic SAGA transactional pattern within a single Persistence (sqlite in my example) aka SQL Transactions (usually in complex system we need to use the distributed transactions services like https://www.opensleigh.net/ , tps://masstransit-project.com/ or https://axoniq.io/, AWS Step Functions, etc) - depends on complexity of project).
 
-While 3 services mentioned are in Domain Later - theyr're Anemic & follow SRP, 
-the Payment processor is represents the very basic SAGA transactional pattern within a single Persistence (sqlite in my example) aka Transactions (usually we're using the distributed transactions services like https://www.opensleigh.net/ , tps://masstransit-project.com/ or https://axoniq.io/, AWS Step Functions, etc) - depends on complexity of project).
-
-2. CQRS / Mediator Pattern 
-We initially lay down a mechanism for processing large amount of data, which is not uncommon for microservice architectures. So i've divided API calls into the Commands and Queries. So its simple to keep data for read in denormalized way (mongodb, elasticache, etc)
+**2. CQRS / Mediator Pattern
+We initially should lay down a mechanism for processing large amount of data, which is not uncommon for microservice architectures. So i've divided API calls into the Commands and Queries. So its simple to keep data for read in denormalized way (mongodb, elasticache, etc)
 
 4. Persistence
 I've used UoW pattern, its simple and flexible and decouples business code from data Access. As a result, the persistence Framework can be changed without a great effort.
