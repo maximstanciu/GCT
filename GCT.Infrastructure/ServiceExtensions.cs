@@ -1,10 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using GCT.Core.Data;
 using GCT.Migrations;
 using GCT.Contracts.Data;
 using GCT.Infrastructure.Data;
+using GCT.Core.StateMachine;
+using GCT.Infrastructure.StateMachine;
 
 namespace GCT.Infrastructure
 {
@@ -26,6 +27,11 @@ namespace GCT.Infrastructure
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
             return services.AddDatabaseContext(configuration).AddUnitOfWork();
+        }
+
+        private static IServiceCollection AddFSM(this IServiceCollection services)
+        {
+            return services.AddScoped<IProcessSM, ProcessSM>();
         }
     }
 }

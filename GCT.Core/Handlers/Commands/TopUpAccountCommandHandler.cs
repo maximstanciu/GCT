@@ -7,16 +7,16 @@ using MediatR;
 
 namespace GCT.Core.Handlers.Commands
 {
-    public class TopUpRecipientCommand : IRequest<int>
+    public class TopUpAccountCommand : IRequest<int>
     {
         public TopUpAccountDTO Model { get; }
-        public TopUpRecipientCommand(TopUpAccountDTO model)
+        public TopUpAccountCommand(TopUpAccountDTO model)
         {
             this.Model = model;
         }
     }
 
-    public class TopUpAccountCommandHandler : IRequestHandler<TopUpRecipientCommand, int>
+    public class TopUpAccountCommandHandler : IRequestHandler<TopUpAccountCommand, int>
     {
         private readonly IUnitOfWork _repository;
         private readonly IValidator<TopUpAccountDTO> _validator;
@@ -27,7 +27,7 @@ namespace GCT.Core.Handlers.Commands
             _validator = validator;
         }
 
-        public async Task<int> Handle(TopUpRecipientCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(TopUpAccountCommand request, CancellationToken cancellationToken)
         {
             TopUpAccountDTO model = request.Model;
             IEnumerable<string> errors;

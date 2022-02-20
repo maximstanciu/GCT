@@ -32,7 +32,7 @@ namespace GCT.API.Controllers
         {
             try
             {
-                var command = new TopUpRecipientCommand(model);
+                var command = new TopUpAccountCommand(model);
                 var response = await _mediator.Send(command);
                 return StatusCode((int)HttpStatusCode.Created, response);
             }
