@@ -29,7 +29,7 @@ namespace GCT.Infrastructure
             return services.AddDatabaseContext(configuration).AddUnitOfWork();
         }
 
-        private static IServiceCollection AddFSM(this IServiceCollection services)
+        public static IServiceCollection AddFSM(this IServiceCollection services)
         {
             return services.AddScoped<IProcessSM, ProcessSM>();
         }

@@ -3,6 +3,7 @@ using GCT.Contracts.Data;
 using GCT.Contracts.Data.Entities;
 using GCT.Contracts.DTO;
 using GCT.Core.Exceptions;
+using GCT.Core.StateMachine;
 using MediatR;
 
 namespace GCT.Core.Handlers.Commands
@@ -20,11 +21,13 @@ namespace GCT.Core.Handlers.Commands
     {
         private readonly IUnitOfWork _repository;
         private readonly IValidator<DepositAccountDTO> _validator;
+        private readonly IProcessSM _process;
 
-        public DepositAccountCommandHandler(IUnitOfWork repository, IValidator<DepositAccountDTO> validator)
+        public DepositAccountCommandHandler(IUnitOfWork repository, IValidator<DepositAccountDTO> validator, IProcessSM process)
         {
             _repository = repository;
             _validator = validator;
+            _process = process;
         }
 
         public async Task<int> Handle(DepositAccountCommand request, CancellationToken cancellationToken)
@@ -70,6 +73,9 @@ namespace GCT.Core.Handlers.Commands
 
             //Begin BASIC SAGA Transaction          
 
+            //Start FSM
+            _process.MoveNext(Enums.Command.Begin);
+
             // Update Sender Balance
             accountFrom.Balance -= model.Amount;
             _repository.Accounts.Update(accountFrom);
@@ -111,6 +117,8 @@ namespace GCT.Core.Handlers.Commands
 
             //Commit Changes
             await _repository.CommitAsync();
+
+            _process.MoveNext(Enums.Command.End);
 
             return entityTo.Id;
         }

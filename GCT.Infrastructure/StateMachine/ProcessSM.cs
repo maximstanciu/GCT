@@ -1,23 +1,9 @@
 ﻿using GCT.Core.StateMachine;
+using static GCT.Contracts.Data.Enums;
 
 namespace GCT.Infrastructure.StateMachine
 {
-    public enum ProcessState
-    {
-        Inactive,
-        Active,
-        Paused,
-        Terminated
-    }
-
-    public enum Command
-    {
-        Begin,
-        End,
-        Pause,
-        Resume,
-        Exit
-    }
+    
 
     public class ProcessSM : IProcessSM
     {

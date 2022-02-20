@@ -24,6 +24,7 @@ namespace GCT
         {
             services.AddPersistence(Configuration);
             services.AddCore();
+            services.AddFSM();
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
