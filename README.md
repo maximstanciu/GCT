@@ -1,9 +1,8 @@
-First of all, I wish to propose the my source code inherited from the inital task but using "Clean Architecture" using .net core development latest tendencies (especially its important when we plan the long-term product development cycles). .
+First of all, I wish to propose the my source code inherited from the inital task but using "Clean Architecture" using .net core development latest tendencies (especially its important when we plan the long-term product development cycles). So, trying to code ortogonal as much as possibel.
 
 What I propose (and you can find this in code).
 
 **1. Domains Identifcation and BC (Bounded Contexts) definition:**
-Ortogonal components of:
 - **3 services:** 1. Users Service. 2. Accounts Service 3. Finance Ledger Service (In this example i've used double-entry strategy).  
 - **1 Processor** - Payment Processor (Abstract). Using classic FSM (Finite State Machine for its complication)
 
