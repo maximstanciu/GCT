@@ -49,7 +49,8 @@ namespace GCT.Core.Handlers.Commands
 
             if (account == null)
             {
-                throw new EntityNotFoundException($"No Account found Id {model.AccountTo}");
+                errors = new List<string>() { $"No Account found Id {model.AccountTo}" };
+                throw new InvalidRequestBodyException { Errors = errors.ToArray() };
             }
 
             account.Balance += model.Amount;

@@ -30,28 +30,27 @@ namespace GCT.Core.Handlers.Commands
         public async Task<int> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
         {
             CreateAccountDTO model = request.Model;
+            IEnumerable<string> errors;
 
             //Fluent Validation
             var result = _validator.Validate(model);
 
             if (!result.IsValid)
             {
-                var errors = result.Errors.Select(x => x.ErrorMessage).ToArray();
+                errors = result.Errors.Select(x => x.ErrorMessage).ToArray();
                 throw new InvalidRequestBodyException
                 {
-                    Errors = errors
+                    Errors = errors.ToArray()
                 };
             }
-
-            var err = new List<string>();
 
             //Check if User Exists
             var user = _repository.Users.Get(model.UserId);
 
             if (user == null)
             {
-                err.Add($"No User found Id {model.UserId}");
-                throw new InvalidRequestBodyException { Errors = err.ToArray() };
+                errors = new List<string>() { $"No User found Id {model.UserId}" };
+                throw new InvalidRequestBodyException { Errors = errors.ToArray() };
             }
 
             //Create a new Account

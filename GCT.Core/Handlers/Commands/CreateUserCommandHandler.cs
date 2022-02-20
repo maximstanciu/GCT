@@ -30,16 +30,17 @@ namespace GCT.Core.Handlers.Commands
         public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             CreateUserDTO model = request.Model;
+            IEnumerable<string> errors;
 
             //Fluent Validation
             var result = _validator.Validate(model);
 
             if (!result.IsValid)
             {
-                var errors = result.Errors.Select(x => x.ErrorMessage).ToArray();
+                errors = result.Errors.Select(x => x.ErrorMessage);
                 throw new InvalidRequestBodyException
                 {
-                    Errors = errors
+                    Errors = errors.ToArray()
                 };
             }
 

@@ -30,31 +30,43 @@ namespace GCT.Core.Handlers.Commands
         public async Task<int> Handle(DepositAccountCommand request, CancellationToken cancellationToken)
         {
             DepositAccountDTO model = request.Model;
+            IEnumerable<string> errors;
 
             //Fluent Validation
             var result = _validator.Validate(model);
 
             if (!result.IsValid)
             {
-                var errors = result.Errors.Select(x => x.ErrorMessage).ToArray();
+                errors = result.Errors.Select(x => x.ErrorMessage);
                 throw new InvalidRequestBodyException
                 {
-                    Errors = errors
+                    Errors = errors.ToArray()
                 };
             }
 
             var accountFrom = _repository.Accounts.Get(model.AccountFrom);
-            var accountTo = _repository.Accounts.Get(model.AccountTo);          
+            var accountTo = _repository.Accounts.Get(model.AccountTo);
+
+            //TODO: This can be moved under Fluent Validator 
 
             //Check Available Balance of Sender & Recipient
             if (accountFrom == null)
-                throw new EntityNotFoundException($"No Account found Id {model.AccountFrom}");
+            {
+                errors = new List<string>() { $"No Account found Id {model.AccountFrom}" };
+                throw new InvalidRequestBodyException { Errors = errors.ToArray() };
+            }
 
             if (accountFrom.Balance < model.Amount)
-                throw new EntityNotFoundException($"Not Enought Balance on Account Id {model.AccountFrom}");
+            {
+                errors = new List<string>() { $"Not Enought Balance on Account Id {model.AccountFrom}" };
+                throw new InvalidRequestBodyException { Errors = errors.ToArray() };
+            }
 
             if (accountTo == null)
-                throw new EntityNotFoundException($"No Account found Id {model.AccountTo}");
+            {
+                errors = new List<string>() { $"No Account found Id {model.AccountTo}" };
+                throw new InvalidRequestBodyException { Errors = errors.ToArray() };
+            }
 
             //Begin BASIC SAGA Transaction          
 

@@ -35,16 +35,17 @@ namespace GCT.Core.Handlers.Commands
         public async Task<int> Handle(WithrawalAccountCommand request, CancellationToken cancellationToken)
         {
             WithdrawalAccountDTO model = request.Model;
+            IEnumerable<string> errors;
 
             //Fluent Validation
             var result = _validator.Validate(model);
 
             if (!result.IsValid)
             {
-                var errors = result.Errors.Select(x => x.ErrorMessage).ToArray();
+                errors = result.Errors.Select(x => x.ErrorMessage);
                 throw new InvalidRequestBodyException
                 {
-                    Errors = errors
+                    Errors = errors.ToArray()
                 };
             }
 
@@ -52,10 +53,16 @@ namespace GCT.Core.Handlers.Commands
             var account = _repository.Accounts.Get(model.AccountFrom);
 
             if (account == null)
-                throw new EntityNotFoundException($"No Account found Id {model.AccountFrom}");
+            {
+                errors = new List<string>() { $"No Account found Id {model.AccountFrom}" };
+                throw new InvalidRequestBodyException { Errors = errors.ToArray() };
+            }
 
-            if(account.Balance < model.Amount)
-                throw new EntityNotFoundException($"Not enought Balance on AccountId {model.AccountFrom}");
+            if (account.Balance < model.Amount)
+            {
+                errors = new List<string>() { $"Not enought Balance on AccountId {model.AccountFrom}" };
+                throw new InvalidRequestBodyException { Errors = errors.ToArray() };
+            }
 
             account.Balance -= model.Amount;
             _repository.Accounts.Update(account);
